@@ -1,0 +1,398 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 60%, #2c5364 100%);
+  font-family: 'Montserrat', 'Amiri', serif;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Decorative background */
+.background-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Moon */
+.moon {
+  position: absolute;
+  top: 5vw;
+  right: 8vw;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, #fff, #e0e0e0 70%, #b3b3b3 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 60px 10px #fff8, 0 0 120px 40px #fff2;
+  animation: floatMoon 6s ease-in-out infinite alternate, rotateMoon 24s linear infinite;
+  opacity: 0.85;
+  filter: blur(0.5px) brightness(1.08);
+}
+
+@keyframes floatMoon {
+  0% { transform: translateY(0);}
+  100% { transform: translateY(20px);}
+}
+@keyframes rotateMoon {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: transparent;
+  z-index: 1;
+  pointer-events: none;
+}
+.stars::before, .stars::after {
+  content: "";
+  position: absolute;
+  width: 100vw; height: 100vh;
+  background-image:
+    radial-gradient(circle, #fff8 1.5px, transparent 1.5px),
+    radial-gradient(circle, #fff6 1px, transparent 1px),
+    radial-gradient(circle, #fff4 1.2px, transparent 1.2px);
+  background-size: 80px 80px, 120px 120px, 200px 200px;
+  background-position: 0 0, 40px 60px, 100px 150px;
+  animation: twinkle 8s linear infinite;
+}
+.stars::after {
+  opacity: 0.7;
+  background-position: 20px 40px, 60px 100px, 150px 200px;
+  animation-delay: 4s;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+
+/* Centered card with glassmorphism */
+.centered-card {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+  margin: 7vh auto 0 auto;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  background: rgba(30, 40, 60, 0.72);
+  border-radius: 2.2rem;
+  box-shadow: 0 12px 48px 0 #000a, 0 2px 0 #ffe06644 inset;
+  border: 2.5px solid #ffe06655;
+  /* Add a glowing border effect */
+  outline: 3px solid #ffe06622;
+  outline-offset: 8px;
+  text-align: center;
+  animation: fadeInCard 1.5s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Crescent decoration */
+.crescent {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 0.5rem;
+  background: radial-gradient(circle at 60% 40%, #fff 80%, #ffe066 100%);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 24px 4px #ffe066cc, 0 0 0 0 #fff8;
+  animation: crescentGlow 3s ease-in-out infinite alternate;
+}
+.crescent::after {
+  content: "";
+  position: absolute;
+  left: 16px; top: 0;
+  width: 54px; height: 54px;
+  background: #1e283c;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 #0000;
+}
+@keyframes crescentGlow {
+  0% { box-shadow: 0 0 18px 2px #ffe06688, 0 0 0 0 #fff8; }
+  100% { box-shadow: 0 0 32px 8px #ffe066cc, 0 0 0 0 #fff8; }
+}
+
+/* Greeting */
+h1#greeting {
+  font-family: 'Amiri', serif;
+  font-size: 2.1em;
+  font-weight: 700;
+  margin: 0 0 0.7em 0;
+  color: #ffe066;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 12px #0008;
+  min-height: 2.5em;
+  animation: fadeIn 2s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  overflow: hidden;
+}
+h1#greeting .shimmer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, transparent 0%, #fff8 40%, #ffe066cc 60%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmerMove 2.5s infinite;
+  pointer-events: none;
+}
+@keyframes shimmerMove {
+  0% { transform: translateX(-100%);}
+  60% { transform: translateX(120%);}
+  100% { transform: translateX(120%);}
+}
+
+/* Subtext */
+.subtext {
+  font-size: 1.13em;
+  margin-bottom: 1.5em;
+  color: #e0e0e0;
+  font-family: 'Montserrat', 'Amiri', serif;
+  line-height: 1.6;
+  animation: fadeInUp 1.5s 0.5s both;
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 3px;
+  margin: 1.5em auto 1.5em auto;
+  background: linear-gradient(90deg, #ffe066 0%, #fff0 50%, #ffe066 100%);
+  height: 4px;
+  border-radius: 6px;
+  opacity: 0.85;
+  box-shadow: 0 0 8px #ffe06688;
+}
+
+/* Quotes */
+.quotes {
+  background: rgba(255,255,255,0.04);
+  border-radius: 1.1em;
+  padding: 1.1em 0.5em 0.7em 0.5em;
+  margin-bottom: 1.2em;
+  box-shadow: 0 2px 12px #ffe06611;
+  border: 1.5px solid #ffe06622;
+}
+.quotes h2 {
+  font-size: 1.25em;
+  margin-bottom: 1em;
+  color: #ffe066;
+  font-family: 'Montserrat', 'Amiri', serif;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 8px #ffe06633;
+}
+.quote {
+  margin: 0.7em 0;
+  font-style: italic;
+  color: #e7e7e7;
+  font-size: 1.07em;
+  background: rgba(255,255,255,0.03);
+  border-radius: 0.7em;
+  padding: 0.6em 0.5em;
+  margin: 0.7em 0 0.7em 0;
+  box-shadow: 0 1px 6px #ffe06622;
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Signature */
+.signature {
+  font-size: 1em;
+  color: #b3cde0;
+  margin-top: 2.2em;
+  margin-bottom: 0;
+  letter-spacing: 0.01em;
+  font-family: 'Montserrat', 'Amiri', serif;
+  border-top: 1px dashed #ffe06644;
+  padding-top: 1em;
+  margin-top: 2.5em;
+}
+.myname {
+  color: #ffe066;
+  font-weight: 700;
+  font-size: 1.08em;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 8px #ffe06644;
+}
+
+/* Animated Lanterns */
+.lanterns {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 3;
+}
+.lantern {
+  position: absolute;
+  width: 32px; height: 48px;
+  background: radial-gradient(ellipse at center, #ffe066 60%, #ffb700 100%);
+  border-radius: 40% 40% 60% 60%/50% 50% 80% 80%;
+  box-shadow: 0 0 18px 6px #ffe06699, 0 8px 24px 0 #ffb70044;
+  opacity: 0.85;
+  animation: floatLantern 12s linear infinite;
+}
+.lantern:nth-child(1) { left: 10vw; bottom: -60px; animation-delay: 0s; }
+.lantern:nth-child(2) { left: 30vw; bottom: -80px; animation-delay: 3s; }
+.lantern:nth-child(3) { left: 60vw; bottom: -70px; animation-delay: 6s; }
+.lantern:nth-child(4) { left: 80vw; bottom: -90px; animation-delay: 1.5s; }
+.lantern::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%; top: 100%;
+  width: 4px; height: 18px;
+  background: linear-gradient(to bottom, #ffe066cc 0%, #fff0 100%);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0.7;
+}
+@keyframes floatLantern {
+  0% { transform: translateY(0) scale(1) rotate(-2deg); opacity: 0.7;}
+  10% { opacity: 1;}
+  50% { transform: translateY(-60vh) scale(1.05) rotate(2deg);}
+  100% { transform: translateY(-110vh) scale(1) rotate(-2deg); opacity: 0;}
+}
+
+/* Musafaha (Two Persons) Animation */
+.musafaha-anim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2.2em 0 1.2em 0;
+  animation: fadeInUp 1.2s 0.7s both;
+  user-select: none;
+}
+.musafaha-svg {
+  display: block;
+  margin: 0 auto;
+  /* Slight shadow for depth */
+  filter: drop-shadow(0 2px 8px #0004);
+}
+.musafaha-label {
+  font-size: 0.97em;
+  color: #ffe066;
+  margin-top: 0.5em;
+  letter-spacing: 0.02em;
+  font-family: 'Montserrat', 'Amiri', serif;
+  opacity: 0.85;
+}
+
+/* Animate the arms for musafaha */
+.arm-left {
+  transform-origin: 60px 65px;
+  animation: musafaha-arm-left 2.2s cubic-bezier(.4,0,.2,1) infinite;
+}
+.arm-right {
+  transform-origin: 160px 65px;
+  animation: musafaha-arm-right 2.2s cubic-bezier(.4,0,.2,1) infinite;
+}
+
+@keyframes musafaha-arm-left {
+  0%,100% { transform: rotate(0deg);}
+  20% { transform: rotate(0deg);}
+  35% { transform: rotate(18deg);}
+  55% { transform: rotate(18deg);}
+  70% { transform: rotate(0deg);}
+}
+@keyframes musafaha-arm-right {
+  0%,100% { transform: rotate(0deg);}
+  20% { transform: rotate(0deg);}
+  35% { transform: rotate(-18deg);}
+  55% { transform: rotate(-18deg);}
+  70% { transform: rotate(0deg);}
+}
+
+/* Responsive for musafaha */
+@media (max-width: 600px) {
+  .musafaha-anim {
+    margin: 1.2em 0 0.7em 0;
+  }
+  .musafaha-svg {
+    width: 100px !important;
+    height: 40px !important;
+  }
+  .musafaha-label {
+    font-size: 0.85em;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .centered-card {
+    max-width: 98vw;
+    margin-top: 3vw;
+    padding: 0.8rem 0.2rem 1rem 0.2rem;
+    border-radius: 1.1rem;
+  }
+  .moon {
+    width: 70px; height: 70px;
+    top: 18vw; right: 6vw;
+  }
+  .crescent {
+    width: 36px; height: 36px;
+  }
+  .crescent::after {
+    width: 36px; height: 36px; left: 10px;
+  }
+  h1#greeting {
+    font-size: 1.25em;
+    min-height: 2em;
+  }
+  .subtext, .quote, .signature {
+    font-size: 0.97em;
+  }
+  .divider {
+    width: 40px; height: 2px;
+    margin: 1em auto 1em auto;
+  }
+  .quotes {
+    padding: 0.7em 0.2em 0.5em 0.2em;
+  }
+}
+
+/* Hide scrollbars for a cleaner look */
+body::-webkit-scrollbar { width: 0 !important; }
+    top: 18vw; right: 6vw;
+  }
+  .crescent {
+    width: 36px; height: 36px;
+  }
+  .crescent::after {
+    width: 36px; height: 36px; left: 10px;
+  }
+  h1#greeting {
+    font-size: 1.25em;
+    min-height: 2em;
+  }
+  .subtext, .quote, .signature {
+    font-size: 0.97em;
+  }
+  .divider {
+    width: 40px; height: 2px;
+    margin: 1em auto 1em auto;
+  }
+  .quotes {
+    padding: 0.7em 0.2em 0.5em 0.2em;
+  }
+}
+
+
+/* Hide scrollbars for a cleaner look */
+body::-webkit-scrollbar { width: 0 !important; }
