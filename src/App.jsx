@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-const greetingText = "🌙 Muharram Mubarak 1447";
+const greetingText = "Happy Muharram Mubarak 1447";
 const speed = 70;
 
 function App() {
@@ -11,13 +11,13 @@ function App() {
   useEffect(() => {
     function typeWriter() {
       if (iRef.current < greetingText.length) {
-        setDisplayed((prev) =>
-          prev.replace(/<span class="shimmer"><\/span>/, "") +
-          greetingText.charAt(iRef.current) +
-          '<span class="shimmer"></span>'
+        setDisplayed(
+          greetingText.slice(0, iRef.current + 1) + '<span class="shimmer"></span>'
         );
         iRef.current++;
         setTimeout(typeWriter, speed);
+      } else {
+        setDisplayed(greetingText); // Remove shimmer at the end
       }
     }
     typeWriter();
